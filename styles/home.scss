@@ -20,6 +20,11 @@ body {
   right: 0;
 }
 
+form {
+  display: flex;
+  flex: auto;
+}
+
 .chatbar-message,
 .chatbar-username {
   border: 1px solid black;
