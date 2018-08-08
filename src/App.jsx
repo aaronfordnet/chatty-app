@@ -42,12 +42,20 @@ class App extends Component {
     console.log(newMessage);
     const messages = this.state.messages.concat(newMessage);
     this.setState({currentUser: username, messages});
-    
+
     event.target.elements.message.value = '';
   }
 
   componentDidMount() {
-    console.log("componentDidMount <App />");
+    console.log("componentDidMount <App /> :)");
+
+    const ws = new WebSocket('ws://localhost:3001/');
+
+    ws.onopen = function(event) {
+      console.log('Connected to server! :D');
+      ws.send("Hello! :D");
+    };
+
     setTimeout(() => {
       console.log("Simulating incoming message");
       // Add a new message to the list of messages in the data store
@@ -72,3 +80,6 @@ class App extends Component {
 }
 
 export default App;
+
+
+    // socket: "ws://localhost:3001/",
