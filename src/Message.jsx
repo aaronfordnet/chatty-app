@@ -2,23 +2,28 @@ import React, {Component} from 'react';
 
 class Message extends Component {
   render() {
-    const username = this.props.username;
-    const content = this.props.content;
+    const type = this.props.data.type
 
-    return (
-      <div className="message">
-        <span className="message-username">{username}</span>
-        <span className="message-content">{content}</span>
-      </div>
-    );
+    if (type === 'incomingMessage') {
+      console.log('Creating new message list component');
+      const username = this.props.data.username;
+      const content = this.props.data.content;
+
+      return (
+        <div className="message">
+          <span className="message-username">{username}</span>
+          <span className="message-content">{content}</span>
+        </div>
+      );
+    } else if (type === 'incomingNotification') {
+      console.log('Creating new notification list component');
+      const content = this.props.data.content;
+      return (
+        <div className="message system">{content}</div>
+      );
+    }
+
   }
 }
 
 export default Message;
-
-{/*
-<div className="message system">
-Anonymous1 changed their name to nomnom.
-</div>
-</div>
-*/}

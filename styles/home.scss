@@ -20,19 +20,15 @@ body {
   right: 0;
 }
 
-form {
-  display: flex;
-  flex: auto;
-}
 
 .chatbar-message,
 .chatbar-username {
   border: 1px solid black;
-  display: block;
+  display: flex;
   height: 40px;
   line-height: 40px;
   margin: 5px;
-  padding: 0 9px;
+  padding: 0;
 }
 
 .chatbar-message {
@@ -41,6 +37,11 @@ form {
 
 .chatbar-username {
   flex: 2;
+}
+
+input {
+  width: 100%;
+  padding: 0 9px;
 }
 
 .message {
