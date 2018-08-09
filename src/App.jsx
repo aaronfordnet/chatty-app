@@ -3,13 +3,22 @@ import React, {Component} from 'react';
 import MessageList from './MessageList.jsx';
 import ChatBar from './ChatBar.jsx';
 import Message from './Message.jsx';
+import NavBar from './NavBar.jsx';
+
+
+// commit / push
+// trim() names when changed
+// prevent changing name to Anonymous?
+// Refresh name input value with current user when message submitted (currently can be left blank)
+// Tool tip when username field focused (enter username or leave blank to stay anon, press enter to confirm)
 
 class App extends Component {
   constructor(props) {
     super(props)
     this.socket = new WebSocket('ws://localhost:3001/');
     this.state = {
-      currentUser: { name: 'Bob' },
+      currentUser: { name: '' },
+      usersOnline: 0,
       messages: []
     }
   }
@@ -18,45 +27,54 @@ class App extends Component {
     event.preventDefault();
 
     // Create new message object
-    const username = this.state.currentUser.name;
+    let username = this.state.currentUser.name;
+    if (!username) {
+      username = 'Anonymous';
+    }
     const content = event.target.elements.message.value;
     const newMessage = {type: "postMessage", username, content};
     console.log('sending message:', newMessage);
     // Send new message to socket server
-    this.socket.send(JSON.stringify(newMessage));
+    if (content.trim().length > 0) {
+      this.socket.send(JSON.stringify(newMessage));
+    }
 
-    // Clear message input
     event.target.elements.message.value = '';
   }
 
-
   changeUsername = (event) => {
     event.preventDefault();
-    const oldUsername = this.state.currentUser.name;
-    const newUsername = event.target.elements.username.value;
+    let oldUsername = this.state.currentUser.name;
+    if (!oldUsername) oldUsername = 'Anonymous';
+    let newUsername = event.target.elements.username.value;
+    if (!newUsername) newUsername = 'Anonymous';
     const content = `${oldUsername} has changed their name to ${newUsername}.`;
-    this.setState({
-      currentUser: { name: newUsername }
-    });
-    const postNotification = {type: "postNotification", content};
-    this.socket.send(JSON.stringify(postNotification));
+    if (this.state.currentUser.name !== event.target.elements.username.value) {
+      this.setState({
+        currentUser: { name: event.target.elements.username.value }
+      });
+      const postNotification = {type: "postNotification", content};
+      this.socket.send(JSON.stringify(postNotification));
+    }
   }
 
   componentDidMount() {
-    console.log("componentDidMount <App /> :)");
+    console.log("componentDidMount <App />");
 
     // Receive formatted message from socket server
     this.socket.onmessage = (event) => {
       const data = JSON.parse(event.data);
 
       if (data.type === 'incomingMessage') {
-        console.log('Incoming message received:', data);
         const messages = this.state.messages.concat(data);
         this.setState({ messages });
       } else if (data.type === 'incomingNotification') {
         console.log('Incoming notification received:', data);
         const messages = this.state.messages.concat(data);
         this.setState({ messages });
+      } else if (data.type === 'incomingUserCount') {
+        this.setState({ usersOnline: data.activeUsers });
+        console.log('Current active users:', this.state.usersOnline);
       } else {
         console.error('Error - Invalid event type:', data.type);
       }
@@ -66,6 +84,7 @@ class App extends Component {
 
   render() {
     return (<div>
+      <NavBar usersOnline={this.state.usersOnline} />
       <MessageList messages={this.state.messages} />
       <ChatBar currentUser={this.state.currentUser} submitMessage={this.addMessage} submitUsername={this.changeUsername}/>
     </div>);

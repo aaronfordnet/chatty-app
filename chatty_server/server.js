@@ -24,8 +24,19 @@ const wss = new SocketServer({
 wss.on('connection', (ws) => {
   console.log('Client connected');
 
+  const activeUsers = wss.clients.size;
+  wss.clients.forEach((client) => {
+    const sendUserCount = {
+      type: "incomingUserCount",
+      activeUsers: activeUsers,
+      key: uuidv4()
+    }
+    client.send(JSON.stringify(sendUserCount));
+  });
+
   ws.on('message', (message) => {
     const msg = JSON.parse(message);
+    console.log(msg);
 
     if (msg.type === "postMessage") {
       msg.type = "incomingMessage";
@@ -47,5 +58,16 @@ wss.on('connection', (ws) => {
 
   });
 
-  ws.on('close', () => console.log('Client disconnected'));
+  ws.on('close', () => {
+    console.log('Client disconnected')
+    const activeUsers = wss.clients.size;
+    wss.clients.forEach((client) => {
+      const sendUserCount = {
+        type: "incomingUserCount",
+        activeUsers: activeUsers,
+        key: uuidv4()
+      }
+      client.send(JSON.stringify(sendUserCount));
+    });
+  });
 });
