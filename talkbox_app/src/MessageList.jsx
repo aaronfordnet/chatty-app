@@ -41,7 +41,8 @@ class MessageList extends Component {
         {displayMessages}
 
         <div ref={(ref) => this.bottomMessage = ref}></div>
-      </main>);
+      </main>
+    );
   }
 }
 

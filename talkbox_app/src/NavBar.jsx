@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 class NavBar extends Component {
   render() {
     const usersOnline = this.props.usersOnline;
+
     let plural = 's';
     if (usersOnline === 1) {
       plural = '';
