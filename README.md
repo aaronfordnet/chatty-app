@@ -2,8 +2,7 @@
 
 A responsive real-time chat app built with React and WebSockets.
 
-!["TalkBox app interface"](https://raw.githubusercontent.com/aaronfordnet/)
-!["TalkBox app on devices"](https://raw.githubusercontent.com/aaronfordnet)
+!["TalkBox app interface"](https://raw.githubusercontent.com/aaronfordnet/chatty-app/master/docs/TalkBoxUsage.gif)
 
 ## To Install
 
