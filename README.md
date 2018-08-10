@@ -21,7 +21,7 @@ A responsive real-time chat app built with React and WebSockets.
 - react
 - react-dom
 
-### App Dev Dependancies
+### App Dev Dependencies
 - babel-core
 - babel-loader
 - babel-preset-es2015
@@ -37,7 +37,7 @@ A responsive real-time chat app built with React and WebSockets.
 - webpack
 - webpack-dev-server
 
-## Server Dependancies
+## Server Dependencies
 - express
 - ws
 - uuid
