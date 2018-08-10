@@ -9,6 +9,153 @@ body {
   margin: 70px 0;
 }
 
+/* ==============================================
+                    NAV BAR
+================================================= */
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #444752;
+  height: 60px;
+  left: 0;
+  padding: 0 10px;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 1;
+}
+
+.navbar-brand {
+  color: #f9ffff;
+  display: block;
+  font-weight: 700;
+  font-size: 28px;
+  height: 60px;
+  line-height: 60px;
+  padding: 0 10px;
+  text-decoration: none;
+
+}
+
+.navbar-counter {
+  color: #f9ffff;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+/* ==============================================
+                    MESSAGES
+================================================= */
+
+.message {
+  display: flex;
+  flex-direction: column;
+  padding: 0 20px 5px;
+}
+
+.message.system {
+  font-style: italic;
+  padding: 5px 50px;
+  text-align: center;
+}
+
+/* =========================
+   MESSAGES - OTHER USERS
+============================ */
+
+.message-content {
+  display: flex;
+  width: 100%;
+}
+
+.bubble-left {
+  position: relative;
+  background-color: #ddd;
+  padding: 12px 15px;
+  border-radius: 0 10px 10px 10px;
+}
+
+.bubble-left.secondary {
+  border-radius: 10px;
+}
+
+.bubble-right {
+  flex: 1;
+}
+
+.message-content,
+.message-username {
+  margin: 0;
+}
+
+.message-username {
+  padding: 0;
+  font-weight: 700;
+  margin-bottom: 5px;
+  margin-top: 3px;
+}
+
+.message-time {
+  font-size: 12px;
+  padding: 0 0 0 5px;
+  color: #888;
+  font-weight: 300;
+}
+
+/* =========================
+   MESSAGES - CURRENT USER
+============================ */
+
+.message-content-current {
+  display: flex;
+  width: 100%;
+}
+
+.bubble-right-current {
+  position: relative;
+  background-color: #854db7;
+  color: #fbfbfb;
+  padding: 12px 15px;
+  border-radius: 10px 0 10px 10px;
+}
+
+.bubble-right-current.secondary {
+  border-radius: 10px;
+}
+
+.bubble-left-current {
+  flex: 1;
+}
+
+.message-content-current,
+.message-username-current {
+  margin: 0;
+}
+
+.message-username-current {
+  padding: 0;
+  font-weight: 700;
+  margin-bottom: 5px;
+  margin-top: 3px;
+  text-align: right;
+}
+
+.message-time-current {
+  font-size: 12px;
+  padding: 0 0 0 5px;
+  color: #888;
+  font-weight: 300;
+}
+
+
+
+/* ==============================================
+                    CHAT BAR
+================================================= */
+
+
 .chatbar {
   background-color: #444752;
   bottom: 0;
@@ -55,91 +202,42 @@ input {
   line-height: 0;
   box-sizing: border-box;
   transition: all 80ms ease-in;
+  height: 40px;
 }
 
 .message-button:hover {
   background-color: #7844a7;
 }
 
+@media screen and (max-width: 520px) {
+  .chatbar-message {
+    flex-wrap: wrap;
+  }
 
+  .chatbar {
+    height: 100px;
+  }
 
-.message {
-  display: flex;
-  flex-direction: column;
-  padding: 0 20px 5px;
-}
+  .message-button {
+    width: 100%;
+    height: 40px;
+  }
 
-.message.system {
-  font-style: italic;
-  padding: 5px 50px;
-}
+  .button-container {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 60px;
 
-.message-content {
-  display: flex;
-  width: 100%;
-}
+    margin-left: 5px;
+    margin-right: 15px;
+  }
 
-.bubble-left {
-  position: relative;
-  background-color: #ddd;
-  padding: 12px 15px;
-  border-radius: 0 10px 10px 10px;
-}
+  .chatbar-message {
+    flex: 7;
+  }
 
-.bubble-left.secondary {
-  border-radius: 10px;
-}
-
-.bubble-right {
-  flex: 1;
-}
-
-.message-content,
-.message-username {
-  margin: 0;
-}
-
-.message-username {
-  padding: 0;
-  font-weight: 700;
-  margin-bottom: 5px;
-}
-
-.message-time {
-  font-size: 12px;
-  padding: 0 0 0 5px;
-  color: #888;
-  font-weight: 300;
-}
-
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #444752;
-  height: 60px;
-  left: 0;
-  padding: 0 10px;
-  position: fixed;
-  right: 0;
-  top: 0;
-  z-index: 1;
-}
-
-.navbar-brand {
-  color: #f9ffff;
-  display: block;
-  font-weight: 700;
-  font-size: 28px;
-  height: 60px;
-  line-height: 60px;
-  padding: 0 10px;
-  text-decoration: none;
-
-}
-
-.navbar-counter {
-  color: #f9ffff;
-  font-size: 12px;
-  text-transform: uppercase;
+  .chatbar-username {
+    flex: 3;
+  }
 }

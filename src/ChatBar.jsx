@@ -16,13 +16,11 @@ class ChatBar extends Component {
       <footer className="chatbar">
 
         <form onSubmit={(event) => { this.props.submitUsername(event); this.shiftFocus(event); }} className="chatbar-username">
-        <input name="username" placeholder="Your Name (Optional)" defaultValue={this.props.currentUser.name} autoComplete="off" />
-
+        <input name="username" placeholder="Name (Optional)" defaultValue={this.props.currentUser.name} autoComplete="off" />
         </form>
 
         <form onSubmit={this.props.submitMessage} className="chatbar-message">
-        <input ref={(ref) => { this.messageInput = ref; }} name="message" placeholder="Type a message and hit ENTER" autoComplete="off" /><button type="submit" className="message-button">SEND</button>
-
+        <input className="message-input" ref={(ref) => { this.messageInput = ref; }} name="message" placeholder="Type a message and hit ENTER" autoComplete="off" /><div className="button-container" ><button className="message-button" type="submit">SEND</button></div>
         </form>
 
       </footer>

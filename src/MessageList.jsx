@@ -5,22 +5,34 @@ import Message from './Message.jsx';
 class MessageList extends Component {
 
   componentDidUpdate() {
-      this.newData.scrollIntoView({ behavior: "smooth" })
+      this.bottomMessage.scrollIntoView({ behavior: "smooth" })
   }
 
   render() {
+
     const messages = this.props.messages;
     let prevUser = '';
     let userFlag = false;
+    let currentUser = this.props.currentUser.name;
+    let currentUserFlag = false;
     const displayMessages = messages.map(msg => {
-      console.log('PREVIOUS USERNAME:', msg.username);
+
+      // Check for repeat messages from same username
       if (prevUser === msg.username) {
         userFlag = true;
       } else {
         userFlag = false;
       }
       prevUser = msg.username;
-      return <Message data={msg} key={msg.key} userFlag={userFlag}/>;
+
+      // Check if message is from current users
+      if (currentUser === msg.username) {
+        currentUserFlag = true;
+      } else {
+        currentUserFlag = false;
+      }
+
+      return <Message data={msg} key={msg.key} userFlag={userFlag} currentUserFlag={currentUserFlag} />;
     });
 
     return (
@@ -28,7 +40,7 @@ class MessageList extends Component {
 
         {displayMessages}
 
-        <div ref={(ref) => this.newData = ref}></div>
+        <div ref={(ref) => this.bottomMessage = ref}></div>
       </main>);
   }
 }

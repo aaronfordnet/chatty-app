@@ -5,12 +5,12 @@ import ChatBar from './ChatBar.jsx';
 import Message from './Message.jsx';
 import NavBar from './NavBar.jsx';
 
-
-// commit / push
-// trim() names when changed
 // prevent changing name to Anonymous?
 // Refresh name input value with current user when message submitted (currently can be left blank)
 // Tool tip when username field focused (enter username or leave blank to stay anon, press enter to confirm)
+// Responsive send button for smaller screens
+// Display own messages on right and colored 
+
 
 class App extends Component {
   constructor(props) {
@@ -46,12 +46,12 @@ class App extends Component {
     event.preventDefault();
     let oldUsername = this.state.currentUser.name;
     if (!oldUsername) oldUsername = 'Anonymous';
-    let newUsername = event.target.elements.username.value;
+    let newUsername = event.target.elements.username.value.trim();
     if (!newUsername) newUsername = 'Anonymous';
     const content = `${oldUsername} has changed their name to ${newUsername}.`;
-    if (this.state.currentUser.name !== event.target.elements.username.value) {
+    if (this.state.currentUser.name !== event.target.elements.username.value.trim()) {
       this.setState({
-        currentUser: { name: event.target.elements.username.value }
+        currentUser: { name: event.target.elements.username.value.trim() }
       });
       const postNotification = {type: "postNotification", content};
       this.socket.send(JSON.stringify(postNotification));
@@ -85,7 +85,7 @@ class App extends Component {
   render() {
     return (<div>
       <NavBar usersOnline={this.state.usersOnline} />
-      <MessageList messages={this.state.messages} />
+      <MessageList messages={this.state.messages} currentUser={this.state.currentUser} />
       <ChatBar currentUser={this.state.currentUser} submitMessage={this.addMessage} submitUsername={this.changeUsername}/>
     </div>);
   }
