@@ -5,13 +5,6 @@ import ChatBar from './ChatBar.jsx';
 import Message from './Message.jsx';
 import NavBar from './NavBar.jsx';
 
-// prevent changing name to Anonymous?
-// Refresh name input value with current user when message submitted (currently can be left blank)
-// Tool tip when username field focused (enter username or leave blank to stay anon, press enter to confirm)
-// Responsive send button for smaller screens
-// Display own messages on right and colored 
-
-
 class App extends Component {
   constructor(props) {
     super(props)
@@ -48,7 +41,7 @@ class App extends Component {
     if (!oldUsername) oldUsername = 'Anonymous';
     let newUsername = event.target.elements.username.value.trim();
     if (!newUsername) newUsername = 'Anonymous';
-    const content = `${oldUsername} has changed their name to ${newUsername}.`;
+    const content = `${oldUsername} changed their name to ${newUsername}.`;
     if (this.state.currentUser.name !== event.target.elements.username.value.trim()) {
       this.setState({
         currentUser: { name: event.target.elements.username.value.trim() }

@@ -18,7 +18,7 @@ body {
   justify-content: space-between;
   align-items: center;
   background-color: #444752;
-  height: 60px;
+  height: 70px;
   left: 0;
   padding: 0 10px;
   position: fixed;
@@ -27,27 +27,34 @@ body {
   z-index: 1;
 }
 
+.brand-container {
+  height: 70px;
+  display: flex;
+  align-items: center;
+}
+
 .navbar-brand {
   color: #f9ffff;
-  display: block;
   font-weight: 700;
   font-size: 28px;
-  height: 60px;
-  line-height: 60px;
-  padding: 0 10px;
+  padding: 0 5px 0 10px;
   text-decoration: none;
-
 }
 
 .navbar-counter {
   color: #f9ffff;
   font-size: 12px;
   text-transform: uppercase;
+  padding-right: 10px;
 }
 
 /* ==============================================
                     MESSAGES
 ================================================= */
+
+.messages {
+  padding-top: 10px;
+}
 
 .message {
   display: flex;
@@ -239,5 +246,9 @@ input {
 
   .chatbar-username {
     flex: 3;
+  }
+
+  .messages {
+    padding-bottom: 50px;
   }
 }
