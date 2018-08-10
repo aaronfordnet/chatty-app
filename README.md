@@ -17,9 +17,27 @@ A responsive real-time chat app built with React and WebSockets.
 3. In a browser, navigate to ``http://localhost:3000/``
 4. Chat away!
 
-## Dependencies
+## App Dependencies
+- react
+- react-dom
 
-- React
-- Webpack
-- [babel-loader](https://github.com/babel/babel-loader)
-- [webpack-dev-server](https://github.com/webpack/webpack-dev-server)
+### App Dev Dependancies
+- babel-core
+- babel-loader
+- babel-preset-es2015
+- babel-preset-react
+- babel-preset-stage-0
+- css-loader
+- eslint
+- eslint-plugin-react
+- node-sass
+- sass-loader
+- sockjs-client
+- style-loader
+- webpack
+- webpack-dev-server
+
+## Server Dependancies
+- express
+- ws
+- uuid
